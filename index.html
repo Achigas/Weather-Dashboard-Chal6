@@ -15,28 +15,56 @@
         <span class="navbar-brand mb-0 w-100 h1 text-white">Weather Dashboard</span>
     </nav>
 
-    <!--- Form -->
-    <div class="form-container">
+    <!--- main container for whole page-->
+    <div class="container-fluid">
         <div class="row">
-          <div class="col-4 bg-light">
+
+            <!-- form/search column -->
+          <div class="col-lg-3 bg-light">
+
             <p class="search-instruction my-1">Search for a city: </p>
-            <form id="city-form mb-3">
-                <div class="form-input">
+            <!-- input section -->
+            <form id="city-form">
+                <div class="input-group">
                     <input id="city-input" type="text" class="form-control" placeholder="Enter city name" aria-label="Enter city name">
-                    <button class="btn btn-primary btn-inline" type="button" id="search-button">
-                        <i class="fas fa-search"></i>
-                    </button>
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit" id="search-button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
                 </div>
             </form>
-            <form id="search-history"></form>
-        </div>
+            <!-- End input section -->
+
+            <!-- Search history section -->
+            <div id="search-history">
+                <!-- Add search history buttons-->
+            </div>
+
+            <!---end column-->
+           </div> 
+
+        <!--- Current City Container -->
+        <div class="col-lg-9">
+            <div class="row">
+                <div id="current-container" class="mt-2 border col">
+                    <!-- Display current weather data here -->
+                </div>
+            </div>
+
+                    <!--- 5-day forecast container-->
+
+            <div>
+                <h5>5 Day Forecast</h5>
+                <div id="forecast-container"></div>
+            </div> 
         </div>
 
+<!--- end fluid container and row  -->
     </div>
+</div>
 
-    <!-- Current weather data -->
-    <!-- five day forecast -->
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
