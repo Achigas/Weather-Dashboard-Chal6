@@ -14,18 +14,26 @@
     <nav class="navbar navbar-light bg-secondary text-center">
         <span class="navbar-brand mb-0 w-100 h1 text-white">Weather Dashboard</span>
     </nav>
+
     <!--- Form -->
     <div class="form-container">
         <div class="row">
-            <div class="col-4 bg-light">
-                <p class="search-instruction my-1">Search for a city: </p>
-                <form></form>
-            </div>
+          <div class="col-4 bg-light">
+            <p class="search-instruction my-1">Search for a city: </p>
+            <form id="city-form mb-3">
+                <div class="form-input">
+                    <input id="city-input" type="text" class="form-control" placeholder="Enter city name" aria-label="Enter city name">
+                    <button class="btn btn-primary btn-inline" type="button" id="search-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+            <form id="search-history"></form>
+        </div>
         </div>
 
     </div>
 
-    <!-- Saved Cities -->
     <!-- Current weather data -->
     <!-- five day forecast -->
 
