@@ -8,7 +8,19 @@ var forecastContainerEl = document.getElementById("forecast-container")
 var APIkey = "1f40db029d8aa5986ddf3ab9927c8d74";
 var cities = []
 
-var loadCities = function() {}
+var loadCities = function() {
+    var citiesLoaded = localStorage.getItem("cities")
+    if(!citiesLoaded) {
+        return false;
+    }
+    
+    citiesLoaded = JSON.parse(citiesLoaded);
+    
+    for (var i=0; i < citiesLoaded.length; i++) {
+        displaySearchedCities(citiesLoaded[i])
+        cities.push(citiesLoaded[i])
+    }
+}
 
 var saveCities = function() {
     localStorage.setItem("cities", JSON.stringify(cities));
@@ -150,28 +162,29 @@ var getCityData = function() {
             response.json().then(function(data) {
             console.log(data);
 
-    cities.push(city)
-    saveCities()
-    console.log(cities)
-
-    
     //variables set for data needed from this pull 
     var cityID = data.id;
     var cityName = data.name;
     var latitude = data.coord.lat;
     var longitude = data.coord.lon;
+    
+    //check if city exists in storage/array
+    var prevSearch = cities.includes(cityName)
+    if (!prevSearch) {
+        cities.push(cityName)
+        saveCities()
+        displaySearchedCities(cityName)
+    }
 
-    displaySearchedCities(cityName);
     getWeatherData(cityName,latitude,longitude);
 
-        });
+    });
 
     //if city name is invalid return error message
     } else { 
         alert("Ruh Roh! That city wasn't found!")
         cityFormEl.reset()
      }
-
    });
 };
 
@@ -186,18 +199,12 @@ var getWeatherData = function(city,latitude,longitude) {
         displayCurrentData(city, data);
         displayForecastData(data);
 
- 
-        //end response/then function 
         });
-
-    //end fetch/then function  
     });
 };
 
+//load previously searched cities on page load
+loadCities()
+
+//form submit listener when user enters city
 cityFormEl.addEventListener("submit", getCityData);
-
-
-//get lat and long coordinates 
-//getCityData fetch -- IMPORTANT DATAPOINTS : coord.lat, coord.long , weather.icon , main.temp
-
-//"https://api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&long=" + longitude + "&units=imperial&exclude=hourly,minutely&appid=1f40db029d8aa5986ddf3ab9927c8d74";
