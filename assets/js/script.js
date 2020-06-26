@@ -36,19 +36,31 @@ var displayCurrentData = function(city, data) {
     var tempEl = document.createElement("p");
     var humidityEl = document.createElement("p");
     var windSpeedEl = document.createElement("p");
-    var UVIndexEl = document.createElement ("p");
+    var uvIndexEl = document.createElement ("p");
+    var uvIndexColorEl = document.createElement("span")
+    uvIndexColorEl.textContent = uvIndex
 
+        if (uvIndex <= 4) {
+            uvIndexColorEl.setAttribute("class", "bg-success text-white p-2")
+        } else if (uvIndex <= 8) {
+            uvIndexColorEl.setAttribute("class","bg-warning text-black p-2")
+        } else {
+            uvIndexColorEl.setAttribute("class", "bg-danger text-white p-2")
+        }
+    
     //add current weather data to page
     tempEl.textContent = "Temperature: " + tempCurrent;
     humidityEl.textContent = "Humidity: " + humidity;
     windSpeedEl.textContent = "Wind Speed: " + windSpeed;
-    UVIndexEl.textContent = "UV Index: " + uvIndex;
+    uvIndexEl.textContent = "UV Index: ";
+
+    uvIndexEl.appendChild(uvIndexColorEl)
 
     //append elements to section
     divCurrent.appendChild(tempEl);
     divCurrent.appendChild(humidityEl);
     divCurrent.appendChild(windSpeedEl);
-    divCurrent.appendChild(UVIndexEl);
+    divCurrent.appendChild(uvIndexEl);
 
     currentContainerEl.appendChild(divCurrent);
     
@@ -57,13 +69,17 @@ var displayCurrentData = function(city, data) {
 var displayForecastData = function(data) {
     console.log(data)
 
+    forecastContainerEl.textContent = "";
+    var forecastHeaderEl = document.getElementById("five-day");
+    forecastHeaderEl.textContent = "5-day forecast: "
+
     for (var i=1; i < 6; i++) {
         var tempForecast = Math.round(data.daily[i].temp.day);
         var humidityForecast = data.daily[i].humidity;
         var iconForecast = data.daily[i].weather[0].icon;
 
     var cardEl = document.createElement("div");
-    cardEl.setAttribute("class","card");
+    cardEl.setAttribute("class","card col-2 mx-2 bg-primary text-white text-center");
 
     var cardBodyEl = document.createElement("div");
     cardBodyEl.setAttribute("class","card-body");
@@ -76,11 +92,11 @@ var displayForecastData = function(data) {
 
     var cardTempEl = document.createElement("p");
     cardTempEl.setAttribute("class", "card-text");
-    cardTempEl.textContent = "Temperature:" + tempForecast + "°F";
+    cardTempEl.textContent = "Temperature:  " + tempForecast + "°F";
 
     var cardHumidEl = document.createElement("p")
     cardHumidEl.setAttribute("class", "card-text");
-    cardHumidEl.textContent = "Humidity: " + humidityForecast + "%";
+    cardHumidEl.textContent = "Humidity:  " + humidityForecast + "%";
 
     cardBodyEl.appendChild(cardDateEl)
     cardBodyEl.appendChild(cardIconEl)
