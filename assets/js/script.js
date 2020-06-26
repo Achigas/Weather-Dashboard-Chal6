@@ -34,6 +34,11 @@ var displaySearchedCities = function(city) {
     cityCardNameEl.textContent = city;
     
     cityCardEl.appendChild(cityCardNameEl)
+
+    cityCardEl.addEventListener("click", function () {
+        getCityData(city)
+    });
+
     searchHistoryEl.appendChild(cityCardEl)
 
 }
@@ -148,10 +153,9 @@ var displayForecastData = function(data) {
     }
 };
 
-var getCityData = function() {
+var getCityData = function(city) {
     event.preventDefault();
-    var city = cityInputEl.value.trim();
-
+    
     //current conditions in user-entered city//using it to get long and latitude for One call weather API url
     var cityInfoUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIkey;
 
@@ -163,12 +167,11 @@ var getCityData = function() {
             console.log(data);
 
     //variables set for data needed from this pull 
-    var cityID = data.id;
     var cityName = data.name;
     var latitude = data.coord.lat;
     var longitude = data.coord.lon;
     
-    //check if city exists in storage/array
+    //check if city exists in storage/array -- update it if not
     var prevSearch = cities.includes(cityName)
     if (!prevSearch) {
         cities.push(cityName)
@@ -207,4 +210,10 @@ var getWeatherData = function(city,latitude,longitude) {
 loadCities()
 
 //form submit listener when user enters city
-cityFormEl.addEventListener("submit", getCityData);
+cityFormEl.addEventListener("submit", function() {
+    cityInput = cityInputEl.value.trim();
+    getCityData(cityInput);
+})
+
+
+
