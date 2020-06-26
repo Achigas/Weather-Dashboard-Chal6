@@ -6,6 +6,7 @@ An up-to-date weather forecast of any city!
 * [Screenshots](#screenshots)
 * [URL](#url)
 * [Code](#code)
+* [API](#api)
 * [Status](#status)
 * [Inspiration](#inspiration)
 * [Contact](#contact)
@@ -23,6 +24,9 @@ The purpose is to display the current weather and five day forecast for a search
 * HTML
 * CSS
 * Javascript
+
+## API
+* OpenWeather
 
 ## Status
 Project is complete. 
