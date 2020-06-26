@@ -54,7 +54,7 @@ var displayCurrentData = function(city, data) {
 
     //create HTML for city/date/icon
     currentContainerEl.textContent = ""
-    currentContainerEl.setAttribute("class", "m-3 border col-4 text-center")
+    currentContainerEl.setAttribute("class", "m-3 border col-10")
     var divCityHeader = document.createElement("div")
     var headerCityDate = document.createElement("h2");
     var currentdate = moment().format("L");
@@ -118,7 +118,7 @@ var displayForecastData = function(data) {
     
     //create card elements and data elements for weather data
     var cardEl = document.createElement("div");
-    cardEl.setAttribute("class","card col-2 mx-3 bg-primary text-white text-center");
+    cardEl.setAttribute("class","card col-xl-2 col-md-5 col-sm-12 mx-3 my-2 bg-primary text-white text-center");
 
     var cardBodyEl = document.createElement("div");
     cardBodyEl.setAttribute("class","card-body");
