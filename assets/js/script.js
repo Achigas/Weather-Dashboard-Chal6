@@ -54,7 +54,7 @@ var displayCurrentData = function(city, data) {
 
     //create HTML for city/date/icon
     currentContainerEl.textContent = ""
-    currentContainerEl.setAttribute("class", "m-3 border col-md-9 text-center")
+    currentContainerEl.setAttribute("class", "m-3 border col-10 text-center")
     var divCityHeader = document.createElement("div")
     var headerCityDate = document.createElement("h2");
     var currentdate = moment().format("L");
