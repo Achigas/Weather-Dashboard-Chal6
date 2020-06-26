@@ -6,6 +6,25 @@ var currentContainerEl = document.getElementById("current-container")
 var forecastContainerEl = document.getElementById("forecast-container")
 
 var APIkey = "1f40db029d8aa5986ddf3ab9927c8d74";
+var cities = []
+
+var loadCities = function() {}
+
+var saveCities = function() {
+    localStorage.setItem("cities", JSON.stringify(cities));
+}
+
+var displaySearchedCities = function(city) {
+    var cityCardEl = document.createElement("div");
+    cityCardEl.setAttribute("class", "card");
+    var cityCardNameEl = document.createElement("div");
+    cityCardNameEl.setAttribute("class", "card-body searched-city");
+    cityCardNameEl.textContent = city;
+    
+    cityCardEl.appendChild(cityCardNameEl)
+    searchHistoryEl.appendChild(cityCardEl)
+
+}
 
 var displayCurrentData = function(city, data) {
 
@@ -18,6 +37,7 @@ var displayCurrentData = function(city, data) {
 
     //create HTML for city/date/icon
     currentContainerEl.textContent = ""
+    currentContainerEl.setAttribute("class", "m-3 border col-4 text-center")
     var divCityHeader = document.createElement("div")
     var headerCityDate = document.createElement("h2");
     var currentdate = moment().format("L");
@@ -64,7 +84,7 @@ var displayCurrentData = function(city, data) {
 
     currentContainerEl.appendChild(divCurrent);
     
-}
+};
 
 var displayForecastData = function(data) {
     console.log(data)
@@ -109,34 +129,50 @@ var displayForecastData = function(data) {
     //append body to card and then container element
     cardEl.appendChild(cardBodyEl);
     forecastContainerEl.appendChild(cardEl);
+    
+    //reset form after data displays
+    cityFormEl.reset()
 
     }
-}
-
+};
 
 var getCityData = function() {
     event.preventDefault();
-    var city = cityInputEl.value.trim()
-
-    //build out user input validation
+    var city = cityInputEl.value.trim();
 
     //current conditions in user-entered city//using it to get long and latitude for One call weather API url
     var cityInfoUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=imperial&appid=" + APIkey;
 
     //make a request to the url
     fetch(cityInfoUrl).then(function(response) {
-        response.json().then(function(data) {
+        //if response is okay, no errors found
+        if (response.ok) {
+            response.json().then(function(data) {
             console.log(data);
 
-        //variables set for data needed from this pull 
-        var cityID = data.id;
-        var cityName = data.name;
-        var latitude = data.coord.lat;
-        var longitude = data.coord.lon;
+    cities.push(city)
+    saveCities()
+    console.log(cities)
 
+    
+    //variables set for data needed from this pull 
+    var cityID = data.id;
+    var cityName = data.name;
+    var latitude = data.coord.lat;
+    var longitude = data.coord.lon;
+
+    displaySearchedCities(cityName);
     getWeatherData(cityName,latitude,longitude);
+
         });
-    });
+
+    //if city name is invalid return error message
+    } else { 
+        alert("Ruh Roh! That city wasn't found!")
+        cityFormEl.reset()
+     }
+
+   });
 };
 
 var getWeatherData = function(city,latitude,longitude) { 
