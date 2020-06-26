@@ -118,7 +118,7 @@ var displayForecastData = function(data) {
     
     //create card elements and data elements for weather data
     var cardEl = document.createElement("div");
-    cardEl.setAttribute("class","card col-2 mx-2 bg-primary text-white text-center");
+    cardEl.setAttribute("class","card col-2 mx-3 bg-primary text-white text-center");
 
     var cardBodyEl = document.createElement("div");
     cardBodyEl.setAttribute("class","card-body");
