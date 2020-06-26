@@ -69,7 +69,7 @@ var displayForecastData = function(data) {
     cardBodyEl.setAttribute("class","card-body");
 
     var cardDateEl = document.createElement("h6");
-    cardDateEl.textContent = "current date";
+    cardDateEl.textContent = moment().add(i, 'days').format("L");
 
     var cardIconEl = document.createElement("img");
     cardIconEl.setAttribute("src", "https://openweathermap.org/img/wn/" + iconForecast + "@2x.png")
