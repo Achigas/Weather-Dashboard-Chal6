@@ -39,7 +39,7 @@ var displayCurrentData = function(city, data) {
     var uvIndexEl = document.createElement ("p");
     var uvIndexColorEl = document.createElement("span")
     uvIndexColorEl.textContent = uvIndex
-
+    //color for background of UVindex depending on severity
         if (uvIndex <= 4) {
             uvIndexColorEl.setAttribute("class", "bg-success text-white p-2")
         } else if (uvIndex <= 8) {
@@ -68,16 +68,18 @@ var displayCurrentData = function(city, data) {
 
 var displayForecastData = function(data) {
     console.log(data)
-
+    //input header and clear data - header is outside main forecast container 
     forecastContainerEl.textContent = "";
     var forecastHeaderEl = document.getElementById("five-day");
-    forecastHeaderEl.textContent = "5-day forecast: "
+    forecastHeaderEl.textContent = "5-day Forecast:"
 
+    //for loop for five day forecast
     for (var i=1; i < 6; i++) {
         var tempForecast = Math.round(data.daily[i].temp.day);
         var humidityForecast = data.daily[i].humidity;
         var iconForecast = data.daily[i].weather[0].icon;
-
+    
+    //create card elements and data elements for weather data
     var cardEl = document.createElement("div");
     cardEl.setAttribute("class","card col-2 mx-2 bg-primary text-white text-center");
 
@@ -97,12 +99,14 @@ var displayForecastData = function(data) {
     var cardHumidEl = document.createElement("p")
     cardHumidEl.setAttribute("class", "card-text");
     cardHumidEl.textContent = "Humidity:  " + humidityForecast + "%";
-
+    
+    //append children to card body
     cardBodyEl.appendChild(cardDateEl)
     cardBodyEl.appendChild(cardIconEl)
     cardBodyEl.appendChild(cardTempEl)
     cardBodyEl.appendChild(cardHumidEl)
     
+    //append body to card and then container element
     cardEl.appendChild(cardBodyEl);
     forecastContainerEl.appendChild(cardEl);
 
