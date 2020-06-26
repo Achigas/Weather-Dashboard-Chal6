@@ -86,9 +86,9 @@ var displayCurrentData = function(city, data) {
         }
     
     //add current weather data to page
-    tempEl.textContent = "Temperature: " + tempCurrent;
-    humidityEl.textContent = "Humidity: " + humidity;
-    windSpeedEl.textContent = "Wind Speed: " + windSpeed;
+    tempEl.textContent = "Temperature: " + tempCurrent + "°F";
+    humidityEl.textContent = "Humidity: " + humidity + "%";
+    windSpeedEl.textContent = "Wind Speed: " + windSpeed + " MPH";
     uvIndexEl.textContent = "UV Index: ";
 
     uvIndexEl.appendChild(uvIndexColorEl)
